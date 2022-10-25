@@ -11,7 +11,7 @@ const Header = () => {
   console.log(user);
   const [tab, setTab] = useState(true);
   const handleTab = (event) => {
-    // setTab(false);
+    setTab(!tab);
     console.log(event);
   };
   const handleOut = () => {
@@ -26,7 +26,7 @@ const Header = () => {
       <Navbar.Brand href="#home">Coding-tutorial</Navbar.Brand>
 
       <div onClick={handleTab}>
-        {!tab ? <Button>Light</Button> : <Button>Dark</Button>}
+        {tab ? <Button>Light</Button> : <Button>Dark</Button>}
       </div>
       {<h5>{user?.displayName}</h5>}
       {user?.uid ? (
@@ -39,7 +39,11 @@ const Header = () => {
       )}
 
       {user?.uid ? (
-        <Image style={{ height: "40px" }} roundedCircle src={user?.photoURL}></Image>
+        <Image
+          style={{ height: "40px" }}
+          roundedCircle
+          src={user?.photoURL}
+        ></Image>
       ) : (
         "pic"
       )}
