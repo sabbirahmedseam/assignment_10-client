@@ -5,7 +5,8 @@ import Form from "react-bootstrap/Form";
 import { AuthContext } from "./AuthProvider";
 
 const Register = () => {
-  const { googleSign, signInPassword } = useContext(AuthContext);
+  const { updateUserProfile, googleSign, signInPassword } =
+    useContext(AuthContext);
   const provider = new GoogleAuthProvider();
 
   const handleRegister = (event) => {
@@ -15,12 +16,15 @@ const Register = () => {
     const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
+    const profile = { displayName: name, photoURL: photoURL };
     // console.log(name, photoURL, email, password);
 
     signInPassword(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        updateUserProfile(profile)
+
       })
       .catch((error) => console.log(error));
   };
