@@ -18,7 +18,7 @@ const Register = () => {
       <Form onSubmit={handleRegister}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Name</Form.Label>
-          <Form.Control name="name" type="text" placeholder="Enter Name" />
+          <Form.Control name="name" type="text" placeholder="Enter Full Name" />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
