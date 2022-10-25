@@ -2,18 +2,20 @@ import React from "react";
 import { Image } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import pic from "./images/edtech.png";
 
 const Header = () => {
   return (
-    <Navbar bg="primary" variant="dark">
+    <Navbar bg="light" variant="light">
       <Image style={{ height: "30px" }} rounded src={pic}></Image>
       <Navbar.Brand href="#home">Coding-tutorial</Navbar.Brand>
-      <Nav className="me-auto">
-        <Nav.Link href="#home">Courses</Nav.Link>
-        <Nav.Link href="#features">FAQ</Nav.Link>
-        <Nav.Link href="#pricing">Blog</Nav.Link>
-      </Nav>
+
+      <Link to="/course">Courses</Link>
+      <Link to="#features">FAQ</Link>
+      <Link to="#pricing">Blog</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
     </Navbar>
   );
 };
