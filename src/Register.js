@@ -1,8 +1,13 @@
-import React from "react";
+import { GoogleAuthProvider } from "firebase/auth";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { AuthContext } from "./AuthProvider";
 
 const Register = () => {
+  const { googleSign, signInPassword } = useContext(AuthContext);
+  const provider = new GoogleAuthProvider();
+
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -10,7 +15,23 @@ const Register = () => {
     const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, photoURL, email, password);
+    // console.log(name, photoURL, email, password);
+
+    signInPassword(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleGmail = () => {
+    googleSign(provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -51,6 +72,7 @@ const Register = () => {
             placeholder="Password"
           />
         </Form.Group>
+        <Button onClick={handleGmail}>Log in with gmail</Button>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>

@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { AuthContext } from "./AuthProvider";
 
 const LogIn = () => {
+  const { signLog } = useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
-    const email=form.email.value;
-    const password=form.password.value;
-    console.log(email,password);
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    signLog(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div>
