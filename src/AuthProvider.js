@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -25,6 +26,9 @@ const AuthProvider = ({ children }) => {
   const signInPassword = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
+  const verifyEmail = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
 
   const signLog = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
@@ -40,7 +44,9 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
-      setUser(currentUser);
+      if (currentUser === null || currentUser.emailVerified) {
+        setUser(currentUser);
+      }
       setLoading(false);
     });
     return () => {
@@ -63,6 +69,7 @@ const AuthProvider = ({ children }) => {
     signLog,
     logOut,
     loading,
+    verifyEmail,
   };
 
   return (
