@@ -28,7 +28,7 @@ const Header = () => {
       <div onClick={handleTab}>
         {tab ? <Button>Light</Button> : <Button>Dark</Button>}
       </div>
-      {<h5>{user?.displayName}</h5>}
+      {/* {<h5>{user?.displayName}</h5>} */}
       {user?.uid ? (
         <Button onClick={handleOut}>LogOut</Button>
       ) : (
@@ -39,7 +39,7 @@ const Header = () => {
       )}
 
       {user?.uid ? (
-        <Image
+        <Image title={user?.displayName}
           style={{ height: "40px" }}
           roundedCircle
           src={user?.photoURL}
@@ -50,7 +50,7 @@ const Header = () => {
 
       <Link to="/course">Courses</Link>
       <Link to="#features">FAQ</Link>
-      <Link to="#pricing">Blog</Link>
+      <Link to="/blog">Blog</Link>
     </Navbar>
   );
 };

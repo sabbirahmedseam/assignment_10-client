@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 
 const LogIn = () => {
@@ -42,9 +42,7 @@ const LogIn = () => {
             placeholder="Password"
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
+        <p>if your new this accoutn<Link to='/register'>Register</Link></p>
         <Button variant="primary" type="submit">
           Login
         </Button>
