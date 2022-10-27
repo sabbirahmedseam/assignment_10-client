@@ -28,7 +28,7 @@ const CourseRight = ({ course }) => {
 
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <Link to={`/course/${course.id}`}>
-            <Button variant="primary">Premium Access</Button>
+            <Button variant="primary">See details</Button>
           </Link>
           <p>
             <FaCaretRight></FaCaretRight>
