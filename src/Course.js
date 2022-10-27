@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import CourseLeft from "./CourseLeft";
 import CourseRight from "./CourseRight";
 import { AuthContext } from "./AuthProvider";
-import Stack from "react-bootstrap/Stack";
+import "./Course.css";
 
 const Course = () => {
   const { courses } = useContext(AuthContext);
@@ -16,12 +16,20 @@ const Course = () => {
           <CourseLeft></CourseLeft>
         </Col>
         <Col lg="9">
-          {/* <CourseRight></CourseRight> */}
-          <Stack  direction="horizontal" gap={3}>
+          <h1 style={{textAlign:'center',marginBottom:'20px'}}>Courde Details</h1>
+          <div
+            className="course"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3,1fr)",
+              gap: "10px",
+            }}
+          >
+          
             {courses.map((course) => (
               <CourseRight key={course.id} course={course}></CourseRight>
             ))}
-          </Stack>
+          </div>
         </Col>
       </Row>
     </Container>

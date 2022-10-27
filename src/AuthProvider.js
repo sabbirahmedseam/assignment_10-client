@@ -26,9 +26,9 @@ const AuthProvider = ({ children }) => {
   const signInPassword = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  // const verifyEmail = () => {
-  //   return sendEmailVerification(auth.currentUser);
-  // };
+  const verifyEmail = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
 
   const signLog = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
@@ -47,11 +47,9 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
+
       setUser(currentUser);
-      // if (currentUser === null || currentUser.emailVerified) {
-      //   setUser(currentUser);
-      // }
+      
       setLoading(false);
     });
     return () => {
@@ -60,7 +58,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/courses")
+    fetch("https://coding-server.vercel.app/courses")
       .then((res) => res.json())
       .then((data) => setCourses(data));
   }, []);
@@ -74,7 +72,7 @@ const AuthProvider = ({ children }) => {
     signLog,
     logOut,
     loading,
-    // verifyEmail,
+    verifyEmail,
     updateGithub,
   };
 

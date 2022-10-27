@@ -5,35 +5,18 @@ import { AuthContext } from "./AuthProvider";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import { FaCaretRight } from "react-icons/fa";
 
 const CourseRight = ({ course }) => {
   const { courses } = useContext(AuthContext);
-  // console.log(courses);
-  console.log(course);
 
   return (
-    // <div>
-    //   {courses.map((course) => (
-    //     <Card key={course.id}>
-    //       <p>{course.id}</p>
-    //       <Card.Img style={{ width: "100%" }} variant="top" src={course.img} />
-    //       <Card.Body>
-    //         <Card.Title>{course.title} </Card.Title>
-    //         <Card.Text>
-    //           Some quick example text to build on the card title and make up the
-    //           bulk of the card's content.
-    //         </Card.Text>
-    //         <Link to={`/course/${course.id}`}>
-    //           <Button variant="primary">Go somewhere</Button>
-    //         </Link>
-    //       </Card.Body>
-    //     </Card>
-    //   ))}
-    // </div>
-
-    <Card key={course.id}>
-      <p>{course.id}</p>
-      <Card.Img style={{ width: "100%" }} variant="top" src={course.img} />
+    <Card key={course?.id}>
+      <Card.Img
+        style={{ width: "100%", height: "313.11px" }}
+        variant="top"
+        src={course.img}
+      />
 
       <Card.Body>
         <Card.Title>{course.title} </Card.Title>
@@ -43,10 +26,15 @@ const CourseRight = ({ course }) => {
           bulk of the card's content.
         </Card.Text>
 
-        <Link to={`/course/${course.id}`}>
-          <Button variant="primary">Go somewhere</Button>
-        </Link>
-       
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <Link to={`/course/${course.id}`}>
+            <Button variant="primary">Premium Access</Button>
+          </Link>
+          <p>
+            <FaCaretRight></FaCaretRight>
+            <b> {course.total_view}</b>
+          </p>
+        </div>
       </Card.Body>
     </Card>
   );

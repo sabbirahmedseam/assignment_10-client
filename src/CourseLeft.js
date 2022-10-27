@@ -4,17 +4,11 @@ import { AuthContext } from "./AuthProvider";
 
 const CourseLeft = () => {
     const {courses}=useContext(AuthContext);
-//   const [courses, setCourses] = useState([]);
-//   useEffect(() => {
-//     fetch("http://localhost:5000/courses")
-//       .then((res) => res.json())
-//       .then((data) => setCourses(data));
-//   }, []);
-  console.log(courses);
+
   return (
   <div>
-    <h3>course name</h3>
-    {courses.map((course) =><Link to={`/course/${course.id}`}  key={course.id}> <p >{course.title}</p></Link>)}
+    <h1>course name</h1>
+    {courses.map((course) =><Link style={{textDecoration:'none',color:'royalBlue',fontSize:'20px'}}  to={`/course/${course.id}`}  key={course.id}> <p >{course.title}</p></Link>)}
   </div>
   )
   

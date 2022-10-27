@@ -1,16 +1,20 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 
 const Register = () => {
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const {
-    verifyEmail,
     updateUserProfile,
     googleSign,
     signInPassword,
     updateGithub,
+    logOut,
   } = useContext(AuthContext);
   const provider = new GoogleAuthProvider();
   const gitProvider = new GithubAuthProvider();
@@ -23,49 +27,46 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const profile = { displayName: name, photoURL: photoURL };
-    // console.log(name, photoURL, email, password);
 
     signInPassword(email, password)
       .then((result) => {
+        form.reset();
+        toast("register successfully");
         const user = result.user;
-        console.log(user);
-        updateUserProfile(profile)
-          .then((result) => {})
-          .catch((error) => console.log(error));
-        // verifyEmail()
-        //   .then((result) => {})
-        //   .catch((error) => console.log(error));
-        // alert("check your email");
+
+        updateUserProfile(profile).then((result) => {});
+
+        logOut().catch((error) => setError(error.message));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setError(error.message));
   };
 
   const handleGmail = () => {
     googleSign(provider)
       .then((result) => {
+        toast("register successfully");
         const user = result.user;
-        console.log(user);
+        navigate("/");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setError(error.message));
   };
   const handleGit = () => {
     updateGithub(gitProvider)
       .then((result) => {
+        toast("register successfully");
         const user = result.user;
-        console.log(user);
+
+        navigate("/");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setError(error.message));
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <Form onSubmit={handleRegister}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Full name</Form.Label>
           <Form.Control name="name" type="text" placeholder="Enter Full Name" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>PhotoURL</Form.Label>
@@ -74,9 +75,6 @@ const Register = () => {
             type="text"
             placeholder="Enter PhotoURL"
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -95,14 +93,27 @@ const Register = () => {
             placeholder="Password"
           />
         </Form.Group>
-        <Button onClick={handleGmail}>Log in with gmail</Button>
-        <Button onClick={handleGit}>Log in with github</Button>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Login
+        <p style={{ color: "red" }}>{error}</p>
+        <Button
+          style={{ marginRight: "15px" }}
+          onClick={handleGmail}
+          variant="outline-success"
+        >
+          Log in with gmail
         </Button>
+
+        <Button variant="outline-success" onClick={handleGit}>
+          Log in with github
+        </Button>
+
+        <div style={{ marginTop: "5px" }}>
+          <Button variant="primary" type="submit">
+            Register
+          </Button>
+          <span>
+            Already have an account <Link to="/login">Login here</Link>
+          </span>
+        </div>
       </Form>
     </div>
   );

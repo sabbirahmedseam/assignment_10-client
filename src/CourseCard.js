@@ -10,36 +10,35 @@ const ref = React.createRef();
 
 const CourseCard = () => {
   const course = useLoaderData();
-  console.log(course);
-  const { id, inventor, details, img, title, total_view, year } = course;
-  console.log(id);
-  return (
-    <div>
-      <Container>
-        <div ref={ref}>
-          <Card style={{ width: "18rem" }}>
-            <Pdf targetRef={ref} filename="code-example.pdf">
-              {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
-            </Pdf>
 
-            <Card.Img variant="top" src={img} />
-            <Card.Body>
-              <Card.Title>{title}</Card.Title>
-              <Card.Text>{details}</Card.Text>
+  const { id, framework,inventor, details, img, title, total_view, year } = course;
+
+  return (
+    <div style={{ display: "flex", justifyContent: "center",marginTop:'50px', marginBottom:'30px' }}>
+      <div ref={ref}>
+        <Card style={{ width: '50%',margin:'0 auto' }}>
+          <Pdf targetRef={ref} filename="code-example.pdf">
+            {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+          </Pdf>
+
+          <Card.Img variant="top" src={img} />
+          <Card.Body>
+            <Card.Title>{title}</Card.Title>
+            <b>Framework:{framework}</b> <br />
+            <b>{inventor}</b>
+            <Card.Text>{details}</Card.Text>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
               <Link to="/course">
-                <Button variant="primary">Go somewhere</Button>
+                <Button variant="primary">previous</Button>
               </Link>
               <Link to={`/premium/${id}`}>
-                <Button variant="primary">Premium</Button>
+                <Button variant="primary">Premium Access</Button>
               </Link>
-              <br />
-              <Link to={`/premium/${id}`}>
-                <Button variant="primary">Premium</Button>
-              </Link>
-            </Card.Body>
-          </Card>
-        </div>
-      </Container>
+             
+            </div>
+          </Card.Body>
+        </Card>
+      </div>
     </div>
   );
 };

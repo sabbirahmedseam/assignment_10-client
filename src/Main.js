@@ -9,8 +9,9 @@ import Col from "react-bootstrap/Col";
 const Main = () => {
   return (
     <div>
-      <Header></Header>
       
+      <Header></Header>
+     
      <Outlet></Outlet>
     </div>
   );
